@@ -16,7 +16,7 @@ API_LINK="localhost:3000"
 API_SERVICE="service=https://fakestoreapi.com
 VUE_APP_SLS_SECRET="clientseceret@@$#@$#@$##@4"
 
-4) Run The app -- npm run dev
+4) Run The App -- npm run dev
 
 ## Api Used
 https://fakestoreapi.com
