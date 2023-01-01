@@ -1877,6 +1877,11 @@
   "resolved" "https://registry.npmjs.org/@xtuc/long/-/long-4.2.2.tgz"
   "version" "4.2.2"
 
+"@zaengle/error-handler@^1.0.2":
+  "integrity" "sha512-/OR9myX190/nNEmD5iKxJYJk7LF+vF09CKfHonI6w6mIeZ0+zUayGMa8JiQNU7MZHjaqMUh5I53YGNA19Ruq2A=="
+  "resolved" "https://registry.npmjs.org/@zaengle/error-handler/-/error-handler-1.0.2.tgz"
+  "version" "1.0.2"
+
 "accepts@~1.3.5":
   "integrity" "sha512-PYAthTa2m2VKxuvSD3DPC/Gy+U+sOA1LAuT8mkmRuvw+NACSaeXEQ+NHcVF7rONl6qcaxV3Uuemwawk+7+SJLw=="
   "resolved" "https://registry.npmjs.org/accepts/-/accepts-1.3.8.tgz"

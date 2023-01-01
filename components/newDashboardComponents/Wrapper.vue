@@ -4,9 +4,9 @@
     <div class="setup-dashboard-main">
       <slot></slot>
     </div>
-    <button class="setup-dashboard-help-btn">
+    <!-- <button class="setup-dashboard-help-btn">
       <img src="~assets/icons/help.svg" alt="" />
-    </button>
+    </button> -->
   </div>
 </template>
 

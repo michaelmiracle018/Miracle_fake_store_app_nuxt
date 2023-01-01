@@ -40,7 +40,9 @@ export default {
     '~services/ApiService',
     '~plugins/services.plugin',
     '~plugins/bootstrap-icons',
-    '~plugins/vue-owl.js'
+    '~plugins/vue-owl.js',
+    //  { src: '@/plugins/axios.js' }
+    { src: '@/plugins/error-handler.js' },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

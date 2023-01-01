@@ -114,6 +114,7 @@ Navbar
   border-radius: 50%;
   font-size: 17px;
   color: #000;
+  z-index: 99;
 }
 
 nav {
@@ -185,6 +186,7 @@ nav {
 @media screen and (min-width: 800px) {
   nav {
     background: #fff;
+    z-index: -1;
   }
   .nav-center {
     max-width: 1170px;
@@ -203,6 +205,7 @@ nav {
   .links {
     height: auto;
     display: flex;
+    z-index: 2;
   }
   .links a {
     padding: 0;
@@ -224,9 +227,10 @@ nav {
     color: hsl(211, 27%, 70%);
   }
   .qty {
-    left: 45px;
+    left: 39px;
     top: -30px;
     color: #000;
+    z-index: 2;
   }
 }
 </style>

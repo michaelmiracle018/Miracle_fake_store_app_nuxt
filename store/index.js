@@ -12,10 +12,10 @@ export const state = () => ({
   limit: 0,
   specificBag: [],
   loading: false,
+  error: null,
 })
 
 // ##########  GETTERS  #########
-
 
 export const getters = {
   ifAuthenticated: (state) => {
@@ -39,13 +39,11 @@ export const getters = {
     }, 0)
   },
   getSpecificCategory: (state) => state.specificBag,
-  getLoadingStatus: (state) => state.loading
+  getLoadingStatus: (state) => state.loading,
+  getError: (state) => state.error,
 }
 
 // ########## END OF  GETTERS  #########
-
-
-
 
 // ##########  MUTATION  #########
 export const mutations = {
@@ -201,21 +199,24 @@ export const mutations = {
   // LOADING STATUS
   LOADING_STATUS(state, newLoadingStatus) {
     state.loading = newLoadingStatus
-  }
+  },
+  ERROR_MSG(state, newErrorMessage) {
+    console.log(newErrorMessage)
+    state.error = newErrorMessage
+  },
 }
 
 // ##########  ACTIONS  #########
 
-
 export const actions = {
   // ===LOGIN TO DASHBOARD===
   async login({ commit }, payload) {
-    commit('LOADING_STATUS', true);
+    commit('LOADING_STATUS', true)
     try {
       const res = await axios.post(`${baseURL}/auth/login`, payload)
       localStorage.setItem('signInToken', JSON.stringify(res.data.token))
       commit('AUTH_USER', res)
-    commit('LOADING_STATUS', false)
+      commit('LOADING_STATUS', false)
 
       await this.$swal({
         title: 'You have successfully login.',
@@ -230,15 +231,20 @@ export const actions = {
       this.$router.push('/Products')
     } catch (error) {
       await this.$swal({
-        title: 'Wrong Username',
+        title: 'An Error Occurred',
         icon: 'error',
         allowEscapeKey: false,
         allowOutsideClick: false,
         timer: 6000,
         timerProgressBar: true,
-        text: 'Please Copy and Paste The username Below To Login',
+        text: 'Please Copy and Paste The username Below To Login Or Check your Network Connection',
         showConfirmButton: false,
       })
+
+      commit('ERROR_MSG', error)
+
+      // Do something with errorResponse (e.g., display a flash notification)
+
       this.$router.push('/Login')
       console.log(error)
     }
@@ -281,7 +287,7 @@ export const actions = {
 
       commit('FETCH_ALL_PRODUCTS', data)
       commit('GET_LIMIT', body.limit)
-    commit('LOADING_STATUS', false)
+      commit('LOADING_STATUS', false)
 
       return data
     } catch (error) {
@@ -296,7 +302,7 @@ export const actions = {
     try {
       const { data } = await axios.get(`${baseURL}/products/${body.id}`)
       commit('FETCH_SINGLE_PRODUCT', data)
-    commit('LOADING_STATUS', false)
+      commit('LOADING_STATUS', false)
 
       // commit('FETCH_SINGLE_PRODUCT', body.id)
       return data
@@ -312,7 +318,7 @@ export const actions = {
     try {
       const { data } = await axios.get(`${baseURL}/products/categories`)
       commit('FETCH_CATEGORY_PRODUCT', data)
-    commit('LOADING_STATUS', false)
+      commit('LOADING_STATUS', false)
 
       return data
     } catch (error) {
@@ -328,7 +334,7 @@ export const actions = {
       const { data } = await axios.post(`${baseURL}/products`, payload)
       localStorage.setItem('productBag', JSON.stringify(data))
       commit('POST_PRODUCT', data)
-    commit('LOADING_STATUS', false)
+      commit('LOADING_STATUS', false)
 
       await this.$swal({
         title: 'You have successfully posted your product online.',
@@ -369,8 +375,8 @@ export const actions = {
       console.log(data)
       commit('FETCH_SEARCH_CATEGORY', data)
 
-    commit('LOADING_STATUS', false)
-      
+      commit('LOADING_STATUS', false)
+
       return data
     } catch (error) {
       await this.$swal({
@@ -391,9 +397,7 @@ export const actions = {
     // console.log(body)
 
     try {
-      const { data } = await axios.get(
-        `${baseURL}/products/category/${body}`
-      )
+      const { data } = await axios.get(`${baseURL}/products/category/${body}`)
       // console.log(data)
       commit('FETCH_SPECIFIC_CATEGORY', data)
 
@@ -404,5 +408,3 @@ export const actions = {
   },
 }
 // ########## END OF  ACTIONS  #########
-
-

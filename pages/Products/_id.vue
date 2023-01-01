@@ -3,7 +3,10 @@
     <!-- <Nav /> -->
     <div class="sub_container">
       <div class="single_item_wrap">
-        <div>
+        <div v-if="loadingStatus" class="loading">
+            <Loading />
+          </div>
+        <div v-else>
           <div class="img_wrap">
             <img :src="product.getProductsById.image" alt="" />
           </div>
@@ -14,7 +17,7 @@
           <button @click="addToCart(product.getProductsById)">Add To Cart</button>
           <button @click="$router.push('/Cart')">view cart</button>
         </div>
-        <h1>{{ getCategory.getCategory }}</h1>
+        <!-- <h1>{{ getCategory.getCategory }}</h1> -->
       </div>
       <Category />
     </div>
@@ -37,6 +40,9 @@ export default {
     getCategory() {
       return this.$store.getters
     },
+      loadingStatus() {
+      return this.$store.getters.getLoadingStatus
+    },
   },
   methods: {
     addToCart(item) {
@@ -54,6 +60,13 @@ export default {
 </script>
 
 <style scoped>
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10rem;
+}
 .sub_container {
   width: 90vw;
   margin: 3rem auto;

@@ -1,7 +1,7 @@
 <template>
   <div class="form-wrap">
     <form class="login" @click.prevent="handleSubmit">
-      <h2>Login to view the products</h2>
+      <h2>Login</h2>
       <div class="inputs">
         <div class="input">
           <input
@@ -21,7 +21,7 @@
             required
           />
         </div>
-        <div class="error" v-show="error">{{ this.errorMsg }}</div>
+        <!-- <div class="error" >{{ this.errorMsg }}</div> -->
         <div class="text" v-show="msg">{{ this.textMsg }}</div>
       </div>
       <button>Sign IN</button>
@@ -64,7 +64,7 @@
 </template>
 
 <script>
-// import errorResponse from '~/helpers/errorResponse'
+import errorResponse from '~/helpers/errorResponse'
 export default {
   name: 'Login',
   components: {},
@@ -87,6 +87,9 @@ export default {
     getLoginToken() {
       return this.$store.state.loginToken
     },
+    getError() {
+      return this.$store.getters
+    }
   },
 
   methods: {
@@ -103,17 +106,7 @@ export default {
           this.username = ''
         } catch (error) {
           console.log(error)
-          if (error) {
-            await this.$swal({
-              toast: true,
-              text: 'Check your network.',
-              icon: 'error',
-              timer: 3000,
-              timerProgressBar: true,
-              showConfirmButton: false,
-              position: 'top-end',
-            })
-          }
+      //  this.errorMsg = errorResponse(error)
         }
       } else {
         this.msg = true
