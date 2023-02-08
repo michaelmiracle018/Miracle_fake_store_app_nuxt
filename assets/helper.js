@@ -1,23 +1,23 @@
-export const  sampleBlogCards = [
-			{
-				title: "Post card #1",
-				photo: "wear1",
-				date: "may 1, 2022",
-			},
-			{
-				title: "Post card #2",
-				photo: "wear2",
-				date: "may 1, 2022",
-			},
-			{
-				title: "Post card #3",
-				photo: "electronics 1",
-				date: "may 1, 2022",
-			},
-			{
-				title: "Post card #4",
-				photo: "electronic2",
-				date: "may 1, 2022",
+export const sampleBlogCards = [
+  {
+    title: 'Post card #1',
+    photo: 'wear1',
+    date: 'may 1, 2022',
+  },
+  {
+    title: 'Post card #2',
+    photo: 'wear2',
+    date: 'may 1, 2022',
+  },
+  {
+    title: 'Post card #3',
+    photo: 'electronics 1',
+    date: 'may 1, 2022',
+  },
+  {
+    title: 'Post card #4',
+    photo: 'electronic2',
+    date: 'may 1, 2022',
   },
 ]
 

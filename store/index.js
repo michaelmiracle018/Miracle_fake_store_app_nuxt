@@ -84,7 +84,7 @@ export const mutations = {
   // ===ADD TO CART===
   ADD_TO_CART(state, product) {
     const itemFound = state.cart.find((item) => item.id === product.id)
-
+console.log(itemFound);
     if (!itemFound) {
       state.cart.push({ ...product, quantity: 1 })
 

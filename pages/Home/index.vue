@@ -46,7 +46,7 @@ export default {
       },
       sampleBlogPost: [
         {
-          title: 'Men and Women Available ',
+          title: 'Men and Women Wear Available ',
           checkout: 'Checkout more clothings',
           photo: 'wears',
         },

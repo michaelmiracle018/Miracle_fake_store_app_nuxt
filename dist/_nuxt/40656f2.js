@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[15],{517:function(n,t,e){"use strict";e.r(t);var d={name:"newDashboardSideNav"},l=e(81),component=Object(l.a)(d,(function(){return(0,this._self._c)("div",{staticClass:"setup-dashboard-side-navbar"},[this._t("default")],2)}),[],!1,null,null,null);t.default=component.exports}}]);

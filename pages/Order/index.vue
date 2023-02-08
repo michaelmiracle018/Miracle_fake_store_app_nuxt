@@ -159,7 +159,6 @@ export default {
 /* STOCK SOLD COMPONENT */
 
 .sub_container {
-  /*  background: #f4f1ef;*/
   padding-top: 150px;
   width: 100%;
   height: 100%;
