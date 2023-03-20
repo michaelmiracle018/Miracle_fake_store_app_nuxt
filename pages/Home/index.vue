@@ -40,7 +40,7 @@ export default {
     return {
       welcomeScreen: {
         title: 'Welcome!',
-        post: 'Get deals on Shopping in women and men wears at Wings dealers.',
+        post: 'Get deals on Shopping in women and men wears at Wings dealers. As well as electronic stuffs',
         welcomeScreen: true,
         photo: 'boutique-shop',
       },

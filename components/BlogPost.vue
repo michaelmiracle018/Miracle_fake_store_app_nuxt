@@ -6,9 +6,9 @@
             <h2 v-else>{{ info.title }}</h2>
             <p v-if="info.welcomeScreen">{{ info.post }}</p>
             <p v-else class="content-preview">{{ info.checkout }}</p>
-            <router-link v-if="info.welcomeScreen" to="#" class="link link-light">
+            <button v-if="info.welcomeScreen" to="#" class="link link-light" @click="$router.push('/Login')">
                 Login
-            </router-link>
+            </button>
             <router-link v-else to="#" class="link">
                 View The Post
 
@@ -105,15 +105,11 @@ export default {
                 border-bottom: 1px solid transparent;
                 transition: .5s ease-in all;
 
-                &:hover {
-                    border-bottom-color: #303030;
-                }
+             
             }
             .link-light {
                 color: #fff;
-                &:hover {
-                    border-bottom-color: #fff;
-                }
+               
             }
         }
     }

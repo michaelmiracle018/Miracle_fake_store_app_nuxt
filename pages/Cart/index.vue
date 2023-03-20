@@ -1,85 +1,118 @@
 <template>
-  <section>
-    <Nav />
-    <div v-if="cart.getCart.length > 0">
-      <article class="cart_item" v-for="item in cart.getCart" :key="item.id">
-        <img :src="item.image" alt="item.name" />
-        <div>
-          <h4>{{ item.title }}</h4>
-          <h4 class="item_price">
-            $ {{ item.price }}
-          </h4>
-          <button
-            class="remove_btn"
-            @click="$store.commit('DELETE_CART', item.id)"
-          >
-            remove
+  <div>
+    <section>
+      <Nav />
+      <div v-if="cart.getCart.length > 0">
+        <article class="cart_item" v-for="item in cart.getCart" :key="item.id">
+          <img :src="item.image" alt="item.name" />
+          <div>
+            <h4>{{ item.title }}</h4>
+            <h4 class="item_price">$ {{ item.price }}</h4>
+            <button
+              class="remove_btn"
+              @click="$store.commit('DELETE_CART', item.id)"
+            >
+              remove
+            </button>
+          </div>
+          <div>
+            <button
+              class="icon_btn"
+              @click="$store.commit('INCREASE_CART', item.id)"
+            >
+              <i class="fa-solid fa-plus"></i>
+            </button>
+            <p class="amount">{{ item.quantity }}</p>
+            <button
+              class="icon_btn"
+              @click="$store.commit('DECREASE_CART', item.id)"
+            >
+              <i class="fa-solid fa-minus"></i>
+            </button>
+          </div>
+        </article>
+        <div class="footer">
+          <hr />
+          <div class="total_cart">
+            <h2>Total</h2>
+            <h2>$ {{ $store.getters.getTotalItems }}</h2>
+          </div>
+          <div class="action_btn">
+            <div>
+              <button class="btn clear_btn" @click="handleDeleteModal">
+                <!-- ="$store.commit('CLEAR_CART')" -->
+                clear cart
+              </button>
+            </div>
+            <div>
+              <button class="btn clear_btn" @click="$router.push('/Order')">
+                Check Order
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="empty_wrap" v-else>
+        <div class="empty_cart_wrap">
+          <div class="empty_cart">
+            <img src="../../assets/icons/icon-empty.png" alt="" />
+          </div>
+          <div class="no_cart_text">No Item Found Yet</div>
+          <button class="return_btn" @click="$router.push('/Products')">
+            Return To Products
           </button>
         </div>
-        <div>
-          <button
-            class="icon_btn"
-            @click="$store.commit('INCREASE_CART', item.id)"
-          >
-            <i class="fa-solid fa-plus"></i>
-          </button>
-          <p class="amount">{{ item.quantity }}</p>
-          <button
-            class="icon_btn"
-            @click="$store.commit('DECREASE_CART', item.id)"
-          >
-            <i class="fa-solid fa-minus"></i>
-          </button>
-        </div>
-      </article>
-    </div>
-    <div class="empty_wrap" v-else>
-      <div class="empty_cart_wrap">
-        <div class="empty_cart">
-          <img src="../../assets/icons/icon-empty.png" alt="" />
-        </div>
-        <div class="no_cart_text">No Item Found Yet</div>
-        <button class="return_btn" @click="$router.push('/Products')">
-          Return To Products
+      </div>
+    </section>
+    <Modal
+      :show-modal="deleteModal"
+      modal-style="max-width: 650px"
+      title="Delete Cart"
+      @closeModal="deleteModal = false"
+    >
+      <div>
+        <h4>Are you sure you want to do this?</h4>
+
+        <button class="btn clear_btn" @click="handleDeleteItems">
+          Confirm
         </button>
       </div>
-    </div>
-    <div class="footer">
-      <hr />
-      <div class="total_cart">
-        <h2>Total</h2>
-        <h2>$ {{ $store.getters.getTotalItems }}</h2>
-      </div>
-      <div class="action_btn">
-        <div>
-          <button class="btn clear_btn" @click="$store.commit('CLEAR_CART')">
-            clear cart
-          </button>
-        </div>
-        <div>
-          <button class="btn clear_btn" @click="$router.push('/Order')">
-            Check Order
-          </button>
-        </div>
-      </div>
-    </div>
-  </section>
+    </Modal>
+  </div>
 </template>
 
 <script>
 import Nav from '../../components/landingPage/Nav.vue'
+import Modal from '../../components/modalComponent/Modal.vue'
 export default {
   middleware: 'auth',
 
-  components: { Nav },
+  components: { Nav, Modal },
+  data() {
+    return {
+      deleteModal: false,
+    }
+  },
   computed: {
     cart() {
       return this.$store.getters
     },
+    cartQuantity() {
+      this.$store.getters
+    },
+  },
+  methods: {
+    handleDeleteModal() {
+      this.deleteModal = true
+    },
+    handleDeleteItems() {
+      this.$store.commit('CLEAR_CART')
+      this.deleteModal = false
+    },
   },
   head() {
     return {
-      title: 'Cart Page',
+    title: `Cart Page (${this.$store.getters.cartQuantity})`,
       meta: [
         {
           hid: 'description',

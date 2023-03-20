@@ -2,12 +2,7 @@
   <div class="setup-dashboard-top-navbar">
     <div class="setup-dashboard-top-navbar-inner">
       <div class="setup-dashboard-top-navbar-menu-icon">
-        <button
-          class="setup-dashboard-top-navbar-menu-icon-btn"
-          @click="$router.push('/MiniApp')"
-        >
-          <img src="~assets/icons/menu.svg" alt="" />
-        </button>
+      
       </div>
       <!-- <div class="setup-dashboard-top-navbar-search-bar-wrapper">
           <img width="18px" height="18px" src="~assets/icons/search.svg" class="search-icon" alt="">

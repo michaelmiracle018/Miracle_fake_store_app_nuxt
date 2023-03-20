@@ -28,7 +28,7 @@
               <div class="line"></div>
             </div>
             <div class="table_content" v-if="cart.getCart.length > 0">
-              <table >
+              <table>
                 <thead>
                   <tr class="table_header_wrap">
                     <th>Product Image</th>
@@ -67,73 +67,90 @@
                 </tbody>
               </table>
               <!-- BOTTOM BTN CONTAINER -->
-        <section>
-          <div class="footer">
-            <hr />
-            <div class="total_cart">
-              <h2>Total</h2>
-              <h2>$ {{ $store.getters.getTotalItems }}</h2>
-            </div>
-            <div class="action_btn">
-              <div>
-                <button
-                  class="btn clear_btn"
-                  @click="$store.commit('CLEAR_CART')"
-                  
+              <section>
+                <div class="footer">
+                  <hr />
+                  <div class="total_cart">
+                    <h2>Total</h2>
+                    <h2>$ {{ $store.getters.getTotalItems }}</h2>
+                  </div>
+                  <div class="action_btn">
+                    <div>
+                      <button class="btn clear_btn" @click="handleDeleteModal">
+                        clear Order
+                      </button>
+                    </div>
+                    <div>
+                      <button class="btn clear_btn" @click="OrderItems">
+                        {{
+                          cart.getCart.length > 1 ? 'Order Items' : 'Order Item'
+                        }}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <!-- Modal COMPONENT -->
+                <Modal
+                  :show-modal="toggleModal"
+                  modal-style="max-width: 650px"
+                  title="Delete Cart"
+                  @closeModal="toggleModal = false"
                 >
-                  clear Order
-                </button>
-              </div>
-              <div>
-                <button
-                  class="btn clear_btn"
-                  @click="OrderItems"
+                  <div>
+                    <h4>Are you sure you want to do this?</h4>
 
-                >
-                  {{ cart.getCart.length > 1 ? 'Order Items' : 'Order Item' }}
-                </button>
-              </div>
-            </div>
-          </div>
-        </section>
-        <!--END OF BOTTOM BTN CONTAINER -->
+                    <button class="btn clear_btn" @click="handleDeleteItems">
+                      Confirm
+                    </button>
+                  </div>
+                </Modal>
+              </section>
+              <!--END OF BOTTOM BTN CONTAINER -->
             </div>
             <div v-else>
               <h4>NO ITEM FOUND</h4>
             </div>
           </div>
         </section>
-        
-        <!-- SIDE HUB -->
-        <!-- <div class="sides-hub">
-          <p>Miracle Michael © {{ fullYear }}. All Rights Reserved</p>
-        </div> -->
       </div>
     </div>
-
-    <!-- RESTOCK COMPONENT -->
   </section>
 </template>
 
 <script>
 import newDashboardHeader from '~/components/newDashboardComponents/Header.vue'
+import Modal from '~/components/modalComponent/Modal.vue'
 export default {
-  components: { newDashboardHeader },
+  components: { newDashboardHeader, Modal },
   middleware: 'auth',
 
+  data() {
+      return {
+        toggleModal: false,
+      }
+    },
   computed: {
     fullYear() {
       return new Date().getFullYear()
     },
+    
 
     cart() {
       return this.$store.getters
     },
   },
   methods: {
+    handleDeleteModal() {
+      this.toggleModal= true
+
+    },
+    handleDeleteItems() {
+      this.$store.commit('CLEAR_CART')
+      this.toggleModal = false
+    },
     async OrderItems() {
       try {
-     await   this.$swal({
+        await this.$swal({
           title: 'Product ordered successfully.',
           icon: 'success',
           allowEscapeKey: false,
@@ -145,9 +162,7 @@ export default {
         })
         this.$store.commit('CLEAR_CART')
         this.$router.push('/Products')
-      } catch (error) {
-
-      }
+      } catch (error) {}
     },
   },
 
@@ -465,8 +480,6 @@ p {
   border-color: hsl(360, 71%, 66%);
 }
 @media screen and (max-width: 1300px) {
-  .main_container {
-  }
   .sub_container {
     padding-left: 7%;
     padding-right: 7%;

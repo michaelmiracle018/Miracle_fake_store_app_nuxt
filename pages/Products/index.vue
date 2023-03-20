@@ -1,6 +1,8 @@
 <template>
-  <wrapper>
+  <div>
+    <Nav />
     <section class="main_container">
+      
       <div class="sub_container">
         <div class="product_card">
           <header class="header">
@@ -8,11 +10,11 @@
           </header>
           <div class="input_wrap">
             <input
-              type="text"
-              placeholder="search for a category"
-              v-model="search"
+            type="text"
+            placeholder="search for a category"
+            v-model="search"
             />
-
+            
             <button @click="searchCategory">Search</button>
           </div>
           <div v-if="loadingStatus" class="loading">
@@ -22,11 +24,11 @@
             <div
               class="item_wrap"
               v-if="getAllProducts.getAllProducts.length > 0"
-            >
+              >
               <div
-                class="single_card_item"
-                v-for="item in getAllProducts.getAllProducts"
-                :key="item.id"
+              class="single_card_item"
+              v-for="item in getAllProducts.getAllProducts"
+              :key="item.id"
               >
                 <div class="item_title">
                   <h4>
@@ -36,9 +38,9 @@
                 <div class="item_image">
                   <nuxt-link :to="`/Products/${item.id}`" class="card">
                     <img
-                      :src="item.image"
-                      alt="image"
-                      @click="getCategoryProduct(item.category)"
+                    :src="item.image"
+                    alt="image"
+                    @click="getCategoryProduct(item.category)"
                     />
                   </nuxt-link>
                 </div>
@@ -47,10 +49,10 @@
                 </div>
                 <div class="item_rating">
                   <!-- <h6>
-                  <span>{{ item.rating.rate }}</span>
+                    <span>{{ item.rating.rate }}</span>
                 </h6> -->
-                  <!-- <button>view more</button> -->
-                </div>
+                <!-- <button>view more</button> -->
+              </div>
                 <div class="footer">
                   <span>$ {{ item.price }}</span>
                   <button @click="addToCart(item)">Add To cart</button>
@@ -74,18 +76,20 @@
         </div>
       </div>
     </section>
-  </wrapper>
+  </div>
 </template>
 
 <script>
 import Wrapper from '../../components/newDashboardComponents/Wrapper.vue'
 import ProductCard from '../../components/ProductCard.vue'
 import Loading from '../../components/Loading.vue'
+import Nav from '~/components/landingPage/Nav.vue'
+
 // import axios from 'axios'
 export default {
   middleware: 'auth',
 
-  components: { Wrapper, ProductCard, Loading },
+  components: { Wrapper, ProductCard, Loading, Nav },
 
   data() {
     return {
@@ -120,10 +124,10 @@ export default {
             search: this.search,
           }
           await this.$store.dispatch('fetchSearchItem', result)
+          this.search = ''
         } catch (error) {
           console.log(error)
         }
-        this.search = ''
       }
     },
 
@@ -180,7 +184,6 @@ export default {
   margin-top: 5rem;
 }
 .main_container {
-  padding-top: 7rem;
   margin-bottom: 2rem;
   height: 100%;
   width: 100%;

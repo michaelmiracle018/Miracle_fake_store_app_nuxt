@@ -11,8 +11,8 @@
             <img :src="product.getProductsById.image" alt="" />
           </div>
           <h4 class="price">$ {{ product.getProductsById.price }}</h4>
-          <h4 class="title">{{ product.getProductsById.title }}</h4>
-          <h4 class="title">{{ product.getProductsById.category }}</h4>
+          <h4 class="title">Name: {{ product.getProductsById.title }}</h4>
+          <h4 class="title">Category: {{ product.getProductsById.category }}</h4>
           <p class="desc">{{ product.getProductsById.description }}</p>
           <button @click="addToCart(product.getProductsById)">Add To Cart</button>
           <button @click="$router.push('/Cart')">view cart</button>
@@ -55,6 +55,18 @@ export default {
     }
     this.$store.dispatch('fetchSingleProduct', body)
 
+  },
+  head() {
+    return {
+    title: `${this.$store.getters.getProductsById.title}`,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: 'Cart Page',
+        },
+      ],
+    }
   },
 }
 </script>

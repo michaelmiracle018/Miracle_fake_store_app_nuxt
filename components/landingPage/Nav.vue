@@ -29,8 +29,9 @@
             <li @click="$router.push('/Cart')">
               <a>Cart</a>
               
-              <span class="qty">{{ $store.getters.cartQuantity }}</span>
+              <!-- <span class="qty">{{ $store.getters.cartQuantity }}</span> -->
             </li>
+            
           </ul>
           <!-- social media -->
           <ul class="social-icons">
@@ -81,7 +82,12 @@ export default {
         links.classList.toggle('show-links')
       })
     },
+    onLogout() {
+      this.$store.dispatch('LOGOUT')
+      this.$router.push('/')
+    },
   },
+
   computed: {
     cartQuantity() {
       this.$store.getters
